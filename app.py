@@ -5,7 +5,14 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
+def index():
+    with db.connect('database.db') as conn:
+        count = conn.execute('SELECT count(*) FROM counts').fetchone()[0]
+    return render_template('index.html', counter=count)
+
+
+@app.route('/increase')
+def increase():
     with db.connect('database.db') as conn:
         count = conn.execute('SELECT count(*) FROM counts').fetchone()[0]
         print(count)

@@ -1,19 +1,38 @@
-FROM python:alpine
-MAINTAINER Michael Kemna <michael.kemna@gmail.com>
+FROM python:alpine as builder
 
-ENV FLASK_APP /app.py
-
+# uWSGI needs a c-compiler, which results in a container of ~340 mb
 RUN apk add --no-cache linux-headers build-base
 
-# Copy the current directory contents into the container at /app
-COPY . .
+RUN mkdir /install
+WORKDIR /install
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --trusted-host pypi.python.org --no-cache-dir -r ./requirements.txt
+COPY requirements.txt /requirements.txt
+
+RUN pip install --install-option="--prefix=/install" -r /requirements.txt
+
+
+# This is the actual container without compilers (~100 mb)
+FROM python:alpine
+
+
+# Copy the compiled modules from the builder to the actual container
+COPY --from=builder /install /usr/local
+
+# Copy my flask code
+COPY . /app
+
+# Create a non-root user
+RUN adduser -D dummyuser
+# It needs ownership of the workdir to update the sqlite database
+RUN chown dummyuser /app
+USER dummyuser
+
+WORKDIR /app
+
+# Setup the database
+RUN touch database.db
 RUN python ./setup.py
 
 EXPOSE 8080
 
 CMD ["uwsgi", "--ini", "conf.ini"]
-#ENTRYPOINT ["flask", "run", "--host=0.0.0.0", "--port=5000"]
-#ENTRYPOINT ["flask", "run"]
