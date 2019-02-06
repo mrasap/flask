@@ -107,3 +107,6 @@ venv.bak/
 
 # database
 database.db
+
+# intellij
+.idea
