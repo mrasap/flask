@@ -19,7 +19,7 @@ FROM python:alpine
 COPY --from=builder /install /usr/local
 
 # Copy my flask code
-COPY . /app
+COPY ./app /app
 
 # Create a non-root user
 RUN adduser -D dummyuser

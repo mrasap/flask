@@ -18,7 +18,7 @@ def increase():
         print(count)
         conn.execute('insert into counts (id) VALUES (?)', (count+1,))
         conn.commit()
-    return render_template('index.html', counter=count)
+    return render_template('index.html', counter=count+1)
 
 
 if __name__ == '__main__':
