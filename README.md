@@ -9,14 +9,6 @@ The front end is a simple flask app. It creates a simple sqlite database with a 
 - `/` shows the counter
 - `/increase` increases the counter
 
-### Kubernetes manifests
-github repo: https://github.com/mrasap/flask-kubernetes/
-
-
-### Helm templating
-github repo: https://github.com/mrasap/flask-kubernetes-helm/
-
-
 ### Docker CLI 101
 Guide used: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04   
 Documentation: https://docs.docker.com/   
@@ -49,6 +41,14 @@ e.g. `docker login -u mrasap` to login, you will be prompted for your password
 
 **Push** an image to dockerhub: `docker push [OPTIONS] NAME[:TAG]`   
 e.g. `docker push mrasap/flask` will push the image to the dockerhub of mrasap
+
+
+### Kubernetes manifests
+github repo: https://github.com/mrasap/flask-kubernetes/
+
+
+### Helm templating
+github repo: https://github.com/mrasap/flask-kubernetes-helm/
 
 ### Roadmap of features
 [X] Flask demo web app   
