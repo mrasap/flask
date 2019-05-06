@@ -9,6 +9,19 @@ The front end is a simple flask app. It creates a simple sqlite database with a 
 - `/` shows the counter
 - `/increase` increases the counter
 
+### Pytest 
+The testsuite I am using is pytest:   
+https://docs.pytest.org/en/latest/index.html
+
+To make Flask modularizable, I implemented the blueprints concept:   
+http://flask.pocoo.org/docs/1.0/blueprints/
+
+To make Flask testable, I implemented the application factories pattern:   
+http://flask.pocoo.org/docs/1.0/patterns/appfactories/
+
+It might also be worthwhile to consider tox:   
+https://tox.readthedocs.io/en/latest/index.html
+
 ### Kubernetes manifests
 github repo: https://github.com/mrasap/flask-kubernetes/
 
